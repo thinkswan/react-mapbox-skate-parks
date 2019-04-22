@@ -1,5 +1,6 @@
 import React, { useState } from "react"
-import ReactMapGL from "react-map-gl"
+import ReactMapGL, { Marker } from "react-map-gl"
+import * as parkData from "./json/ottawa-skate-parks.json"
 
 export default function App() {
   const [viewport, setViewport] = useState({
@@ -16,7 +17,15 @@ export default function App() {
       mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
       onViewportChange={setViewport}
     >
-      Markers
+      {parkData.features.map(park => (
+        <Marker
+          key={park.properties.PARK_ID}
+          latitude={park.geometry.coordinates[1]}
+          longitude={park.geometry.coordinates[0]}
+        >
+          <div>Skate park</div>
+        </Marker>
+      ))}
     </ReactMapGL>
   )
 }
