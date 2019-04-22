@@ -1,8 +1,9 @@
 import React, { Component } from "react"
+import ReactMapGL from "react-map-gl"
 
 class App extends Component {
   render() {
-    return <div>App</div>
+    return <ReactMapGL>Markers</ReactMapGL>
   }
 }
 
