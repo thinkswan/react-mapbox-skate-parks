@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import ReactMapGL, { Marker, Popup } from "react-map-gl"
 import * as parkData from "./json/ottawa-skate-parks.json"
 import skateboardSvg from "./svg/skateboard.svg"
@@ -14,6 +14,16 @@ export default function App() {
   })
   const [selectedPark, setSelectedPark] = useState(null)
 
+  useEffect(() => {
+    const listener = event => {
+      if (event.key === "Escape") setSelectedPark(null)
+    }
+
+    window.addEventListener("keydown", listener)
+
+    return () => window.removeEventListener("keydown", listener)
+  }, [])
+
   return (
     <ReactMapGL
       {...viewport}
@@ -28,7 +38,7 @@ export default function App() {
         >
           <button
             className="marker-btn"
-            onClick={e => {
+            onClick={() => {
               setSelectedPark(park)
             }}
           >
@@ -41,6 +51,7 @@ export default function App() {
         <Popup
           latitude={selectedPark.geometry.coordinates[1]}
           longitude={selectedPark.geometry.coordinates[0]}
+          onClose={() => setSelectedPark(null)}
         >
           <div>
             <h2>{selectedPark.properties.NAME}</h2>
