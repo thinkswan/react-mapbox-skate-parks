@@ -14,6 +14,7 @@ export default function App() {
     <ReactMapGL
       {...viewport}
       mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
+      onViewportChange={setViewport}
     >
       Markers
     </ReactMapGL>
