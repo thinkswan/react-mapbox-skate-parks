@@ -1,5 +1,6 @@
 {
   "name": "react-mapbox-skate-parks",
+  "description": "A React app that displays all skateboarding parks in Ottawa, Canada.",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
